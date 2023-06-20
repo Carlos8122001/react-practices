@@ -1,33 +1,23 @@
-import { useState,useEffect} from 'react'
+import { Box, CardFooter, Divider, Heading, Stack } from "@chakra-ui/react";
+import DogCard from "./components/DogCard";
 
-const dogAPI = "https://dog.ceo/api/breeds/image/random"
+const dogAPI = "https://dog.ceo/api/breeds/image/random";
 
 function App() {
-
-  const [data,setData] = useState(null);
-  const [isLoading,setIsloading] = useState(true)
-
-    useEffect(()=>{
-    if(isLoading){
-      fetch(dogAPI)
-      .then(response => response.json())
-      .then(dog => setData(dog.message));
-      setTimeout(()=>{
-        setIsloading(false);
-      },2000)
-    }
-    },[isLoading])
-  
-  
   return (
     <>
-      <h1>Fetch practices</h1>
-      {
-        isLoading? <h1>Cargando...</h1> : <img src={data} alt={`image from api dog ${data}`}  />
-      }
-      <button onClick={()=> setIsloading(true)}>Call API</button>
-    </> 
-  )
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        width={"100%"}
+        height={"100vh"}
+      >
+        <DogCard />
+      </Box>
+      <Heading size="sm" textAlign={"center"} margin={"15px"} opacity={"0.7"}>© 2023 – Creation of Carlos Velásquez by Dog API</Heading>
+    </>
+  );
 }
 
-export default App
+export default App;
